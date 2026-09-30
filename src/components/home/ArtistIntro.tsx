@@ -28,19 +28,19 @@ export function ArtistIntro({ transition }: { transition?: IntroTransition }) {
       };
     };
     return (
-      <section id="artist" className="container-x relative h-full scroll-mt-24">
-        <div className="absolute left-5 right-5 top-24 lg:left-12 lg:right-auto lg:top-1/2 lg:w-[25%] lg:-translate-y-1/2">
+      <section id="artist" className="container-x relative flex h-full scroll-mt-24 flex-col gap-8 pb-10 pt-24 sm:pt-28 lg:block lg:py-0">
+        <div className="relative shrink-0 lg:absolute lg:left-12 lg:top-1/2 lg:w-[25%] lg:-translate-y-1/2">
         <div>
           <div style={revealStyle(0)}><SectionLabel index="01 / The Artist">Meet Fabiha</SectionLabel></div>
-          <h2 style={revealStyle(1)} className="mt-6 font-serif text-3xl font-light !leading-[1.35] sm:text-4xl lg:text-[clamp(2rem,3.5vw,4rem)]">“Art has always felt like a <span className="italic text-terracotta">beautiful gift.</span>”</h2>
+          <h2 style={revealStyle(1)} className="mt-3 font-serif text-[clamp(20px,5vw,28px)] font-light !leading-[1.35] lg:mt-6 lg:text-[clamp(2rem,3.5vw,4rem)]">“Art has always felt like a <span className="italic text-terracotta">beautiful gift.</span>”</h2>
           <ul className="mt-8 hidden space-y-3 lg:block">{meta.map((item, index) => <li key={item} style={revealStyle(index + 2)} className="font-sans text-[11px] uppercase tracking-label text-charcoal/70">{item}</li>)}</ul>
         </div>
         </div>
-        <figure className="hero-shared-image absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="relative h-full w-full overflow-hidden rounded-[2px]" style={{ opacity: transition.portraitOpacity }}>
+        <figure className="relative mx-auto flex min-h-0 w-[min(300px,75vw)] max-w-full flex-1 flex-col lg:absolute lg:left-1/2 lg:top-1/2 lg:h-[min(600px,70svh)] lg:w-[min(460px,32vw)] lg:-translate-x-1/2 lg:-translate-y-1/2">
+          <div className="relative min-h-0 max-h-[42svh] w-full flex-1 overflow-hidden rounded-[2px] lg:h-full lg:max-h-none" style={{ opacity: transition.portraitOpacity }}>
             <Image src="/images/artist/fabiha.jpg" alt="Fabiha Shaheen standing before a wall of her paintings in a gallery." fill sizes="(max-width: 1023px) 75vw, 32vw" className="object-cover" />
           </div>
-          <figcaption style={revealStyle(5)} className="mt-4 text-center font-sans text-[10px] uppercase tracking-wide2 text-charcoal/65">Fabiha Shaheen — in the studio</figcaption>
+          <figcaption style={revealStyle(5)} className="mt-4 shrink-0 text-center font-sans text-[10px] uppercase tracking-wide2 text-charcoal/65 lg:absolute lg:inset-x-0 lg:top-full">Fabiha Shaheen — in the studio</figcaption>
         </figure>
         <div className="absolute right-12 top-1/2 hidden w-[25%] -translate-y-1/2 lg:block">
           <div>

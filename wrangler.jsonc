@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fabiha-portfolio",
+  "account_id": "da789ab5e89827d39150a4b2fe2a1a2f",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-30",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": true,
+  "routes": [{ "pattern": "fabihashaheen.art", "custom_domain": true }],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    { "binding": "WORKER_SELF_REFERENCE", "service": "fabiha-portfolio" }
+  ],
+  "images": { "binding": "IMAGES" },
+  "observability": { "enabled": true }
+}

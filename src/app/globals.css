@@ -59,8 +59,7 @@
   @media (max-width: 1023px) {
     .hero-shared-image {
       width: min(300px, 75vw);
-      height: min(400px, 48svh);
-      top: 57%;
+      height: min(400px, 42svh);
     }
   }
 
@@ -99,6 +98,81 @@
   .clip-hidden {
     clip-path: inset(100% 0 0 0);
   }
+}
+
+/* Paintings rest on one continuous wooden picture ledge. */
+.artwork-shelf-panel {
+  --shelf-art-height: clamp(230px, 39svh, 420px);
+  background: radial-gradient(ellipse at 50% 40%, #faf8f4 0%, transparent 70%);
+}
+.artwork-shelf-track {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(36px, 6vw, 100px);
+  width: max-content;
+  min-width: 100%;
+  padding: 38px max(28px, 6vw) 16px;
+}
+.artwork-shelf-item {
+  position: relative;
+  z-index: 1;
+  display: block;
+  flex-shrink: 0;
+  width: calc(var(--shelf-art-height) * var(--art-height) * var(--art-ratio) + 20px);
+  max-width: 78vw;
+}
+.artwork-shelf-frame {
+  height: calc(var(--shelf-art-height) * var(--art-height));
+  padding: 7px;
+  border: 5px solid #69503c;
+  border-right-color: #3d2d23;
+  border-bottom-color: #443225;
+  background: #eee7dc;
+  box-shadow: 5px 7px 7px #281e2026, 14px 12px 22px #281e202b, inset 0 0 0 1px #c0a484;
+  transform: perspective(1000px) rotateY(-3deg) rotate(var(--art-lean));
+  transform-origin: center bottom;
+  transition: transform 0.55s ease, box-shadow 0.55s ease;
+}
+.artwork-shelf-item:is(:hover, :focus-visible) .artwork-shelf-frame {
+  transform: perspective(1000px) rotateY(0) rotate(0) translateY(-8px);
+  box-shadow: 4px 14px 12px #281e2026, 14px 20px 28px #281e2033;
+}
+.artwork-shelf-label { height: 100px; padding-top: 30px; }
+@media (min-width: 1024px) {
+  .artwork-shelf-track {
+    gap: 6vw;
+    padding-inline: 6vw;
+  }
+  .artwork-shelf-item {
+    /* Three slots fill the viewport; the fourth starts beyond its edge. */
+    width: calc(76vw / 3);
+    max-width: none;
+  }
+  .artwork-shelf-frame {
+    width: min(100%, calc(var(--shelf-art-height) * var(--art-height) * var(--art-ratio) + 20px));
+    margin-inline: auto;
+  }
+}
+.artwork-shelf-ledge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 104px;
+  height: 17px;
+  background: repeating-linear-gradient(2deg, transparent 0 3px, #ffffff0a 4px 5px), linear-gradient(#ad8965, #775639);
+  border-top: 3px solid #d2b18e;
+  border-bottom: 3px solid #58412e;
+  box-shadow: 0 10px 14px #33231926, 0 26px 34px #33231912;
+}
+.artwork-shelf-ledge::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 9px;
+  background: linear-gradient(#dfc6a6, #b58d62);
 }
 
 /* Keyboard-only navigation; kept outside normal layout and hover effects. */
