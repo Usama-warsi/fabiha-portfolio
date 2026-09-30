@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instagram } from "lucide-react";
 import { artist } from "@/data/artist";
+import { getArtwork } from "@/data/artworks";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { TextReveal, RevealLine } from "@/components/motion/TextReveal";
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ artwork?: string | string[] }> }) {
+  const query = await searchParams;
+  const artwork = typeof query.artwork === "string" ? getArtwork(query.artwork) : undefined;
   return (
     <div className="pb-28 pt-28 sm:pt-36">
       <div className="container-x">
@@ -72,7 +75,7 @@ export default function ContactPage() {
         {/* Form */}
         <div className="lg:col-span-8">
           <FadeUp delay={0.1}>
-            <ContactForm />
+            <ContactForm key={artwork?.slug ?? "general"} artworkTitle={artwork?.displayTitle} />
           </FadeUp>
         </div>
       </div>

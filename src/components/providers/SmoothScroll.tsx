@@ -36,6 +36,8 @@ export function SmoothScroll() {
         'a[href^="/#"], a[href^="#"]'
       ) as HTMLAnchorElement | null;
       if (!a) return;
+      // Let the skip link use native anchor navigation and move keyboard focus.
+      if (a.classList.contains("skip-link")) return;
       const hash = a.getAttribute("href")!.split("#")[1];
       const el = hash && document.getElementById(hash);
       if (el) {

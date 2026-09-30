@@ -29,6 +29,7 @@ export function Services() {
               <div className="border-b border-charcoal/15">
                 <button
                   type="button"
+                  data-no-splash
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
                   className="group flex w-full items-center gap-6 py-7 text-left sm:py-9"

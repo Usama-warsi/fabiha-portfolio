@@ -101,7 +101,8 @@ export default async function ArtworkDetailPage({
         </div>
 
         <aside className="lg:col-span-4 lg:pt-2">
-          <dl className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-28">
+          <dl>
             <Meta label="Year" value={art.year} />
             <Meta label="Date" value={art.date} />
             <Meta label="Medium" value={art.medium} />
@@ -110,6 +111,10 @@ export default async function ArtworkDetailPage({
             {art.recognition && <Meta label="Recognition" value={art.recognition} />}
             <div className="border-t border-charcoal/15 pt-4" />
           </dl>
+          <Link href={`/contact?artwork=${encodeURIComponent(art.slug)}`} data-no-splash className="mt-6 inline-flex w-full items-center justify-center gap-3 bg-charcoal px-5 py-4 text-center text-[12px] uppercase tracking-wide2 text-warmwhite transition-colors hover:bg-terracotta">
+            Inquire about this artwork <span aria-hidden>→</span>
+          </Link>
+          </div>
         </aside>
       </div>
 

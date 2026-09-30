@@ -7,6 +7,7 @@ import { BrushCursor } from "@/components/ui/BrushCursor";
 import { GrainOverlay } from "@/components/ui/GrainOverlay";
 import { AmbientTexture } from "@/components/webgl/AmbientTexture";
 import { LiquidLens } from "@/components/ui/LiquidLens";
+import { TouchWaterRipple } from "@/components/ui/TouchWaterRipple";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { siteConfig, artist } from "@/data/artist";
 
@@ -82,7 +83,8 @@ export default function RootLayout({
       <body className="font-sans antialiased" suppressHydrationWarning>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-charcoal focus:px-4 focus:py-2 focus:text-warmwhite focus:text-sm"
+          data-no-splash
+          className="skip-link"
         >
           Skip to content
         </a>
@@ -90,9 +92,10 @@ export default function RootLayout({
         <GrainOverlay />
         <AmbientTexture />
         <LiquidLens />
+        <TouchWaterRipple />
         <BrushCursor />
         <Header />
-        <main id="main">{children}</main>
+        <main id="main" tabIndex={-1} className="focus:outline-none">{children}</main>
         <Footer />
       </body>
     </html>

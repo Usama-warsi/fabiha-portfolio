@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const SIZE = 300; // lens diameter (px)
+const INTERACTIVE = 'a, button, [role="link"], [role="button"], input, textarea, select';
 
 /**
  * Cursor-following "liquid glass" lens. A soft circular region trails the
@@ -52,6 +53,24 @@ export function LiquidLens() {
       pos.current.y += (target.current.y - pos.current.y) * 0.16;
       const el = lensRef.current;
       if (el) {
+        // Check the element under the pointer each frame, including when the
+        // page scrolls beneath a stationary cursor. Hide immediately so the
+        // opacity transition cannot leave link text briefly distorted.
+        const hovered = shown.current
+          ? document.elementFromPoint(target.current.x, target.current.y)
+          : null;
+        const artwork = hovered?.closest("[data-liquid-image]");
+        el.style.visibility = hovered?.closest(INTERACTIVE) && !artwork ? "hidden" : "visible";
+        // Linked artwork keeps the lens, clipped to its image so nearby
+        // captions and navigation text remain undistorted.
+        if (artwork) {
+          const bounds = artwork.parentElement?.getBoundingClientRect() ?? artwork.getBoundingClientRect();
+          const left = pos.current.x - SIZE / 2;
+          const top = pos.current.y - SIZE / 2;
+          el.style.clipPath = `inset(${Math.max(0, bounds.top - top)}px ${Math.max(0, left + SIZE - bounds.right)}px ${Math.max(0, top + SIZE - bounds.bottom)}px ${Math.max(0, bounds.left - left)}px)`;
+        } else {
+          el.style.clipPath = "none";
+        }
         el.style.transform = `translate(${pos.current.x - SIZE / 2}px, ${
           pos.current.y - SIZE / 2
         }px)`;

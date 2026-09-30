@@ -143,12 +143,12 @@ export function BrushCursor() {
       <canvas
         ref={canvasRef}
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-[190] mix-blend-multiply"
+        className="pointer-events-none fixed inset-0 z-[290] mix-blend-multiply"
       />
       <div
         ref={tipRef}
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[200] opacity-0"
+        className="pointer-events-none fixed left-0 top-0 z-[300] opacity-0"
         style={{ willChange: "transform" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

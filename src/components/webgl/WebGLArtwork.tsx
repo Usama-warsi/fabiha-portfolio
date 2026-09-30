@@ -65,6 +65,7 @@ export function WebGLArtwork({
 
   return (
     <div
+      data-water-artwork
       className={`relative overflow-hidden ${className}`}
       style={{ aspectRatio: `${width} / ${height}` }}
       onPointerMove={(e) => {

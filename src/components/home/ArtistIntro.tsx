@@ -32,7 +32,7 @@ export function ArtistIntro({ transition }: { transition?: IntroTransition }) {
         <div className="absolute left-5 right-5 top-24 lg:left-12 lg:right-auto lg:top-1/2 lg:w-[25%] lg:-translate-y-1/2">
         <div>
           <div style={revealStyle(0)}><SectionLabel index="01 / The Artist">Meet Fabiha</SectionLabel></div>
-          <h2 style={revealStyle(1)} className="mt-6 font-serif text-3xl font-light leading-[1.2] sm:text-4xl lg:text-[clamp(2rem,3.5vw,4rem)]">“Art has always felt like a <span className="italic text-terracotta">beautiful gift.</span>”</h2>
+          <h2 style={revealStyle(1)} className="mt-6 font-serif text-3xl font-light !leading-[1.35] sm:text-4xl lg:text-[clamp(2rem,3.5vw,4rem)]">“Art has always felt like a <span className="italic text-terracotta">beautiful gift.</span>”</h2>
           <ul className="mt-8 hidden space-y-3 lg:block">{meta.map((item, index) => <li key={item} style={revealStyle(index + 2)} className="font-sans text-[11px] uppercase tracking-label text-charcoal/70">{item}</li>)}</ul>
         </div>
         </div>
@@ -59,7 +59,7 @@ export function ArtistIntro({ transition }: { transition?: IntroTransition }) {
 
       {/* Mobile heading (desktop composes the headline around the image) */}
       <FadeUp>
-        <h2 className="mt-8 font-serif text-4xl font-light leading-[1.05] text-charcoal sm:text-5xl lg:hidden">
+        <h2 className="mt-8 font-serif text-4xl font-light !leading-[1.35] text-charcoal sm:text-5xl lg:hidden">
           “Art has always felt like a beautiful gift.”
         </h2>
       </FadeUp>
@@ -68,7 +68,7 @@ export function ArtistIntro({ transition }: { transition?: IntroTransition }) {
       <div className="mt-10 flex flex-col gap-12 lg:mt-10 lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-10">
         {/* LEFT — headline start, meta, read link */}
         <div className="order-3 lg:order-none lg:col-span-4">
-          <h2 className="hidden font-serif text-[3.2rem] font-light leading-[0.95] text-charcoal lg:block xl:text-[4rem]">
+          <h2 className="hidden font-serif text-[3.2rem] font-light !leading-[1.35] text-charcoal lg:block xl:text-[4rem]">
             “Art has always felt
           </h2>
           <ul className="flex flex-wrap gap-x-5 gap-y-2 lg:mt-10 lg:flex-col lg:gap-3">
@@ -105,14 +105,14 @@ export function ArtistIntro({ transition }: { transition?: IntroTransition }) {
           <figcaption className="mt-4 text-center font-sans text-[11px] uppercase tracking-wide2 text-charcoal/65">
             Fabiha Shaheen — in the studio
           </figcaption>
-          <p className="mt-5 hidden text-center font-serif text-[3.2rem] font-light italic leading-[0.95] text-terracotta lg:block xl:text-[4rem]">
+          <p className="mt-5 hidden text-center font-serif text-[3.2rem] font-light italic !leading-[1.35] text-terracotta lg:block xl:text-[4rem]">
             beautiful gift.”
           </p>
         </figure>
 
         {/* RIGHT — headline turn + the story */}
         <div className="order-2 lg:order-none lg:col-span-4">
-          <p className="hidden font-serif text-[3.2rem] font-light italic leading-[0.95] text-charcoal/55 lg:block xl:text-[4rem]">
+          <p className="hidden font-serif text-[3.2rem] font-light italic !leading-[1.35] text-charcoal/55 lg:block xl:text-[4rem]">
             like a
           </p>
           <div className="space-y-4 font-sans text-[14px] leading-relaxed text-charcoal/75 lg:mt-8">

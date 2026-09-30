@@ -38,6 +38,7 @@ function WorkCard({
           className={`relative w-full overflow-hidden rounded-[2px] bg-stone/30 ${aspect}`}
         >
           <Image
+            data-liquid-image
             src={art.image}
             alt={art.alt}
             fill

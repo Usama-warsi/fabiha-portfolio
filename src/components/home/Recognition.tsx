@@ -12,39 +12,46 @@ export function Recognition() {
   const section = useRef<HTMLElement>(null);
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const [distance, setDistance] = useState(0);
   const [desktop, setDesktop] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [panelHeight, setPanelHeight] = useState(0);
+  const [screenHeight, setScreenHeight] = useState(0);
+  const verticalLead = Math.max(0, panelHeight - screenHeight);
   const pinned = desktop && !reduce && distance > 0;
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
 
   useEffect(() => {
     const measure = () => {
-      setDesktop(window.innerWidth >= 1024 && window.innerHeight >= 800);
+      setDesktop(window.innerWidth >= 1024);
+      setScreenHeight(window.innerHeight);
+      if (panel.current) setPanelHeight(panel.current.offsetHeight);
       if (viewport.current) setDistance(Math.max(0, viewport.current.scrollWidth - viewport.current.clientWidth));
     };
     const observer = new ResizeObserver(measure);
     if (viewport.current) observer.observe(viewport.current);
     if (track.current) observer.observe(track.current);
+    if (panel.current) observer.observe(panel.current);
     window.addEventListener("resize", measure);
     measure();
     return () => { observer.disconnect(); window.removeEventListener("resize", measure); };
   }, []);
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
-    if (pinned && viewport.current) viewport.current.scrollLeft = progress * distance;
+    if (pinned && viewport.current) viewport.current.scrollLeft = Math.max(0, progress * (distance + verticalLead) - verticalLead);
   });
 
   useEffect(() => {
-    if (pinned && viewport.current) viewport.current.scrollLeft = scrollYProgress.get() * distance;
-  }, [pinned, distance, scrollYProgress]);
+    if (pinned && viewport.current) viewport.current.scrollLeft = Math.max(0, scrollYProgress.get() * (distance + verticalLead) - verticalLead);
+  }, [pinned, distance, verticalLead, scrollYProgress]);
 
   function goTo(index: number) {
     const next = Math.max(0, Math.min(recognition.length - 1, index));
     const left = (next / Math.max(1, recognition.length - 1)) * distance;
     if (pinned && section.current) {
-      const top = section.current.getBoundingClientRect().top + window.scrollY + left;
+      const top = section.current.getBoundingClientRect().top + window.scrollY + verticalLead + left;
       const lenis = (window as unknown as { lenis?: Lenis }).lenis;
       if (lenis) lenis.scrollTo(top, { duration: 0.9 });
       else window.scrollTo({ top, behavior: reduce ? "instant" : "smooth" });
@@ -54,8 +61,8 @@ export function Recognition() {
   }
 
   return (
-    <section ref={section} id="recognition" className="scroll-mt-20 bg-ivory" style={pinned ? { height: `calc(100svh + ${distance}px)` } : undefined}>
-      <div className={pinned ? "sticky top-0 flex h-[100svh] flex-col justify-center overflow-hidden py-24" : "py-24 sm:py-28"}>
+    <section ref={section} id="recognition" className="scroll-mt-20 bg-ivory" style={pinned ? { height: panelHeight + distance } : undefined}>
+      <div ref={panel} className={pinned ? "sticky flex min-h-[100svh] flex-col justify-center pb-8 pt-24" : "py-24 sm:py-28"} style={pinned ? { top: -verticalLead } : undefined}>
         <div className="container-x">
           <SectionLabel index="04 / Recognition">Selected Highlights</SectionLabel>
           <div className="mt-6 flex items-end justify-between gap-6">
