@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <filter id="splash" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g filter="url(#splash)" fill="#000">
+    <ellipse cx="60" cy="60" rx="35" ry="30"/>
+    <circle cx="24" cy="36" r="8"/>
+    <circle cx="96" cy="42" r="6"/>
+    <circle cx="34" cy="94" r="7"/>
+    <circle cx="92" cy="86" r="6"/>
+    <circle cx="60" cy="16" r="4"/>
+    <circle cx="16" cy="66" r="4"/>
+    <circle cx="104" cy="66" r="3"/>
+  </g>
+</svg>

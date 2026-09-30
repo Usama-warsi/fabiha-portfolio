@@ -1,0 +1,21 @@
+node_modules/
+.next/
+out/
+dist/
+.open-next/
+.wrangler/
+*.tsbuildinfo
+next-env.d.ts
+.env*
+!.env.example
+.dev.vars*
+!.dev.vars.example
+*.log
+.DS_Store
+Thumbs.db
+
+# Local reference material and screenshot helpers
+prompts.txt
+_brush.mjs
+_hero.mjs
+*.pdf
